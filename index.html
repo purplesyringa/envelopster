@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Envelopster</title>
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<link rel="stylesheet" type="text/css" href="css/top.css">
+		<link rel="stylesheet" type="text/css" href="css/bottom.css">
+	</head>
+	<body onkeypress="if(event.keyCode === 32 && event.target.nodeName !== 'INPUT' && event.target.nodeName !== 'TEXTAREA') play(); else if(event.keyCode === 13 && event.target.nodeName !== 'INPUT' && event.target.nodeName !== 'TEXTAREA') ffStart();">
+		<div class="top">
+			<div class="controls">
+				<div class="control-row">
+					<div class="control">
+						<button class="control-input" onclick="doImport()">Import</button>
+					</div>
+					<div class="control">
+						<button class="control-input" onclick="doExport()">Export</button>
+					</div>
+				</div>
+				<div class="control-row">
+					<div class="control">
+						<div class="control-header" onblur="updatePosition()" onkeypress="if(event.keyCode === 13) updatePosition()">position</div>
+						<input type="text" class="control-input" id="position">
+					</div>
+					<div class="control">
+						<div class="control-header">total</div>
+						<input type="text" class="control-input" id="total_duration" onblur="updateTotalDuration()" onkeypress="if(event.keyCode === 13) updateTotalDuration()" value="0:10">
+					</div>
+				</div>
+				<div class="control-row">
+					<div class="control">
+						<button class="control-input" onclick="ffStart()">|&lt;</button>
+					</div>
+					<div class="control">
+						<button class="control-input" onclick="prevFrame()">&lt;</button>
+					</div>
+					<div class="control">
+						<button class="control-input" id="play_button" onclick="play()">play</button>
+					</div>
+					<div class="control">
+						<button class="control-input" onclick="nextFrame()">&gt;</button>
+					</div>
+				</div>
+				<div class="control-row">
+					<div class="control">
+						<div class="control-header">
+							variable name
+							<div class="control-header-right">
+								<a onclick="prevVariable()">&lt;</a>
+								&nbsp;&nbsp;
+								<a onclick="nextVariable()">&gt;</a>
+							</div>
+						</div>
+						<input type="text" class="control-input" id="variable_name" onblur="updateVariableName()" onkeypress="if(event.keyCode === 13) updateVariableName()" value="blue">
+					</div>
+				</div>
+				<div class="control-row">
+					<div class="control">
+						<div class="control-header">maximum value</div>
+						<input type="text" class="control-input" id="max_value" onblur="updateMinMax()" onkeypress="if(event.keyCode === 13) updateMinMax()">
+					</div>
+				</div>
+				<div class="control-row">
+					<div class="control">
+						<div class="control-header">minimum value</div>
+						<input type="text" class="control-input" id="min_value" onblur="updateMinMax()" onkeypress="if(event.keyCode === 13) updateMinMax()">
+					</div>
+				</div>
+				<div class="control-row">
+					<div class="control">
+						<div class="control-header">current value</div>
+						<input type="text" class="control-input" id="cur_value" onblur="updateCurrentValue()" onkeypress="if(event.keyCode === 13) updateCurrentValue()">
+					</div>
+				</div>
+			</div>
+			<div class="view">
+				<div class="view-wrapper">
+					<canvas class="view-content" id="canvas"></canvas>
+				</div>
+			</div>
+			<div class="code">
+				<textarea class="code-content" id="code" onblur="initShaders()" onkeypress="event.stopPropagation()">
+precision highp float;
+varying vec2 coordVar;
+uniform float blue;
+uniform float t;
+
+void main() {
+	gl_FragColor = vec4((sin(t * 3.) + 1.) / 2. * coordVar.x, coordVar.y, blue, 1.);
+}</textarea>
+			</div>
+		</div>
+
+		<div class="bottom" onmousedown="onMouseDownBottom(event)" onmousemove="onMouseMoveBottom(event)">
+			<div class="bottom-now" id="bottom_now"></div>
+			<div class="bottom-content" id="bottom" ondblclick="onDoubleClickBottom(event)"></div>
+			<canvas class="bottom-wave" id="wave" height="96" onclick="uploadWave()"></canvas>
+			<div class="bottom-wave-status" id="wave_status">
+				Click to upload audio
+			</div>
+		</div>
+
+		<script type="text/javascript" src="js/main.js"></script>
+	</body>
+</html>

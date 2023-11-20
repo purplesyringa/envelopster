@@ -1,0 +1,95 @@
+.bottom {
+	flex: 1 1 0;
+	padding-top: 32px;
+	overflow-x: scroll;
+	overflow-y: visible;
+	position: relative;
+
+	display: flex;
+	flex-direction: column;
+
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+}
+
+.bottom-content {
+	flex: 1 1 0;
+	display: flex;
+	flex-direction: row;
+	height: calc(100% - 96px);
+	position: relative;
+}
+
+.bottom-now {
+	position: absolute;
+	left: 3px;
+	top: 16px;
+	border: 8px solid transparent;
+	border-top: 16px solid white;
+	border-bottom: none;
+}
+
+.bottom-second {
+	height: 100%;
+	position: relative;
+	background-color: #282828;
+	border-right: 1px solid #888;
+	overflow: visible;
+
+	display: flex;
+	flex-direction: row;
+}
+
+.bottom-frame {
+	width: 12px;
+	height: 100%;
+	border-right: 1px solid #444;
+}
+.bottom-frame:last-child {
+	width: 11px;
+	border-right: none;
+}
+
+.bottom-second-timestamp {
+	position: absolute;
+	right: -32px;
+	top: -24px;
+	width: 64px;
+	text-align: center;
+}
+
+.bottom-dot {
+	position: absolute;
+	width: 12px;
+	height: 12px;
+	background-color: #eedd00;
+	z-index: 2;
+}
+.bottom-dot.dragging {
+	background-color: #ffffff;
+}
+
+.bottom-line {
+	position: absolute;
+	height: 2px;
+	background-color: #eedd00;
+	transform-origin: 0 1px;
+	z-index: 1;
+}
+
+.bottom-wave {
+	flex: 0 0 auto;
+	background-color: #181818;
+	cursor: pointer;
+}
+
+.bottom-wave-status {
+	position: fixed;
+	bottom: 52px;
+	width: 100%;
+	text-align: center;
+	pointer-events: none;
+	-webkit-pointer-events: none;
+	-moz-pointer-events: none;
+}
